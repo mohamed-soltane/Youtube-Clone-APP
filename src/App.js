@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import { Grid } from '@material-ui/core';
 import youtube from './api/youtube';
@@ -6,7 +6,7 @@ import SearchBar from './components/SearchBar';
 import VideoDetail from './components/VideoDetail';
 import VideoList from './components/VideoList';
 
-class App extends React.Component {
+class App extends Component {
   state= {
     video:[],
     selectedVideo: null,
@@ -21,12 +21,13 @@ class App extends React.Component {
       }
       });
       this.setState({
-        videos: response.data.items,
+        video: response.data.items,
         selectedVideo: response.data.items[0]
       });
          
     }
   render(){
+    const {selectedVideo, videos} = this.state;
     return (
       <Grid justify="center" container spacing={10}>
         <Grid item xs={12}>
@@ -35,10 +36,10 @@ class App extends React.Component {
               <SearchBar onFormSubmit={this.handleSubmit} />
             </Grid>
             <Grid item xs={8}> 
-              <VideoDetail /> 
+              <VideoDetail video = {this.state.selectedVideo}/> 
             </Grid>
             <Grid item xs={4}> 
-              <VideoList />  
+              <VideoList  video = {this.state.video} />  
             </Grid>
           </Grid>
         </Grid>
