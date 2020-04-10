@@ -4,10 +4,10 @@ import VideoItem from "./VideoItem.js";
 
 
 
-const VideoList = ({video}) => {
+const VideoList = ({video, onVideoSelect}) => {
     const listOfVideos = video.map(video => (
         <VideoItem
-         
+          onVideoSelect={onVideoSelect}
           key={video.id.videoId}
           video={video}
         />
